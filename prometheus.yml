@@ -1,0 +1,27 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  - job_name: 'nats'
+    scrape_interval: 15s
+    static_configs:
+      - targets: ['nats:8222']
+    metrics_path: /varz
+    scrape_timeout: 10s
+
+  - job_name: 'nats-jetstream'
+    scrape_interval: 15s
+    static_configs:
+      - targets: ['nats:8222']
+    metrics_path: /jsz
+    scrape_timeout: 10s
+
+  - job_name: 'prometheus'
+    scrape_interval: 15s
+    static_configs:
+      - targets: ['localhost:9090']
